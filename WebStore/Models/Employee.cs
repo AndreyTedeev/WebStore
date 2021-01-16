@@ -15,6 +15,19 @@ namespace WebStore.Models
 
         public string Patronymic { get; set; }
 
-        public int Age { get; set; }
+        public DateTime Birthday { get; set; }
+
+        public DateTime EmploymentStart { get; set; }
+
+        public DateTime? EmploymentEnd { get; set; } = null;
+
+        public bool IsActive => EmploymentEnd is not null;
+
+        public int Age => Helper.DateDiffInYears(DateTime.Today, Birthday);
+
+        public int Seniority => Helper.DateDiffInYears(EmploymentEnd ?? DateTime.Today, EmploymentStart);
+
+        public string FullName => String.Format($"{LastName}, {FirstName} {Patronymic}");
+
     }
 }

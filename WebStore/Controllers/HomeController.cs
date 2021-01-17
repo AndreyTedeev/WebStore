@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using WebStore.Models;
 
 namespace WebStore.Controllers
@@ -37,23 +36,14 @@ namespace WebStore.Controllers
             },
         };
 
-        public IActionResult Index() {
-            return View();
-        }
+        public IActionResult Index() =>
+            View();
 
-        public IActionResult Employees() {
-            return View(_employees);
-        }
+        public IActionResult Employees() =>
+            View(_employees);
 
-        public IActionResult EmployeeCard(int id) {
-            //return View(_employees.Where((e) => e.Id == employeeId).Single());
-            Employee employee = (
-                from e in _employees
-                where e.Id == id
-                select e)
-                .Single();
-            return View(employee);
-        }
+        public IActionResult EmployeeCard(int id) => 
+            View(_employees.Where((e) => e.Id == id).Single());
 
     }
 }

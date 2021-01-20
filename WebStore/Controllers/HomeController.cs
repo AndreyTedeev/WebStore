@@ -6,5 +6,7 @@ namespace WebStore.Controllers {
 
         public IActionResult Index() => View();
 
+        public IActionResult ContactUs() => View();
+
     }
 }

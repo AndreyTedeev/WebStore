@@ -4,10 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using WebStore.Models;
 
-namespace WebStore.Controllers
-{
-    public class HomeController : Controller
-    {
+namespace WebStore.Controllers {
+
+    public class HomeController : Controller {
 
         private static readonly List<Employee> _employees = new() {
             new() {
@@ -42,7 +41,7 @@ namespace WebStore.Controllers
         public IActionResult Employees() =>
             View(_employees);
 
-        public IActionResult EmployeeCard(int id) => 
+        public IActionResult EmployeeCard(int id) =>
             View(_employees.Where((e) => e.Id == id).Single());
 
     }

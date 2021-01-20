@@ -1,9 +1,9 @@
 ﻿using System;
 
-namespace WebStore.Models
-{
-    public class Employee
-    {
+namespace WebStore.Models {
+
+    public class Employee {
+
         public int Id { get; set; }
 
         public string FirstName { get; set; }

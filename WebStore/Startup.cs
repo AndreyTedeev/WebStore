@@ -6,10 +6,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace WebStore
-{
-    public record Startup(IConfiguration Configuration)
-    {
+namespace WebStore {
+
+    public record Startup(IConfiguration Configuration) {
 
         public void ConfigureServices(IServiceCollection services) {
             services.AddControllersWithViews().AddRazorRuntimeCompilation();

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>@ViewData["Title"] | E-Shopper</title>
+
+    <partial name="Partial/_Styles" />
+    @await RenderSectionAsync("Styles", false)
+
+    <partial name="Partial/_Icons" />
+
+</head>
+
+<body>
+    <partial name="Partial/_Header" />
+
+    @RenderBody()
+
+    <partial name="Partial/_Footer" />
+
+    <partial name="Partial/_Scripts" />
+    @await RenderSectionAsync("Scripts", false)
+
+</body>
+
+</html>

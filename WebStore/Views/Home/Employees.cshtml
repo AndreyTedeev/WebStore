@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@model IEnumerable<WebStore.Models.Employee>
+
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -12,19 +14,15 @@
         <thead>
             <tr>
                 <th>#</th>
-                <th>Фамилия</th>
-                <th>Имя</th>
-                <th>Отчество</th>
-                <th>Возраст</th>
+                <th>Name</th>
+                <th>Age</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var employee in Model) {
                 <tr>
                     <td>@employee.Id</td>
-                    <td>@employee.LastName</td>
-                    <td>@employee.FirstName</td>
-                    <td>@employee.Patronymic</td>
+                    <td><a href="/Home/EmployeeCard/@employee.Id">@employee.FullName</a> </td>
                     <td>@employee.Age</td>
                 </tr>
             }

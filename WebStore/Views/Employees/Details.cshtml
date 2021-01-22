@@ -1,0 +1,49 @@
+﻿@model WebStore.Models.Employee
+@{
+    Layout = "_LayoutEmployees";
+    ViewData["Title"] = $"Employee ID:{Model.Id}";
+}
+
+<h3>EMPLOYEE CARD</h3>
+
+<table class="table">
+    <tbody>
+        <tr>
+            <td>ID:</td>
+            <td>@Model.Id</td>
+        </tr>
+        <tr>
+            <td>Last Name:</td>
+            <td>@Model.LastName</td>
+        </tr>
+        <tr>
+            <td>First Name:</td>
+            <td>@Model.FirstName</td>
+        </tr>
+        <tr>
+            <td>Patronymic:</td>
+            <td>@Model.Patronymic</td>
+        </tr>
+        <tr>
+            <td>Birthday:</td>
+            <td>@Model.Birthday</td>
+        </tr>
+        <tr>
+            <td>Age:</td>
+            <td>@Model.Age</td>
+        </tr>
+        <tr>
+            <td>Employment Start:</td>
+            <td>@Model.EmploymentStart</td>
+        </tr>
+        <tr>
+            <td>Seniority:</td>
+            <td>@Model.Seniority</td>
+        </tr>
+
+    </tbody>
+</table>
+
+<hr />
+
+<a asp-controller="Employees" asp-action="Index">Employees</a>

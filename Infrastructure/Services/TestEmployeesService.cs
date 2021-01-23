@@ -49,6 +49,22 @@ namespace WebStore.Services
 
         public void Update(Employee employee)
         {
+            // SAME RESULT AS BELOW BUT LESS READABLE
+            //Action action = (employee, _employees.Contains(employee), Get(employee.Id)) switch
+            //{
+            //    (null, _, _) => throw new ArgumentNullException(nameof(employee)),
+            //    (_, true, _) => null,
+            //    (_, false, null) => null,
+            //    (_, false, Employee e) => () =>
+            //       {
+            //           e.LastName = employee.LastName;
+            //           e.FirstName = employee.FirstName;
+            //           e.Patronymic = employee.Patronymic;
+            //           e.Birthday = employee.Birthday;
+            //           e.EmploymentStart = employee.EmploymentStart;
+            //           e.EmploymentEnd = employee.EmploymentEnd;
+            //       }
+            //};
             Action action = employee switch
             {
                 null => throw new ArgumentNullException(nameof(employee)),

@@ -50,13 +50,13 @@ namespace WebStore.Controllers
             Action<Employee> action = model switch
             {
                 null => throw new ArgumentNullException(nameof(model)),
-                _ => model.Employee.Id switch
+                _ => model.Id switch
                 {
                     0 => _employeesService.Add,
                     _ => _employeesService.Update
                 }
             };
-            action.Invoke(model.Employee);
+            action.Invoke(model.ToEmployee());
             return RedirectToAction("Index");
         }
 

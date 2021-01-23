@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using WebStore.Models;
 
 namespace WebStore.ViewModels
@@ -9,28 +6,48 @@ namespace WebStore.ViewModels
     public record EmployeeViewModel
     {
 
-        private readonly Employee _employee;
-
         public EmployeeViewModel()
         {
-            _employee = new Employee();
         }
 
         public EmployeeViewModel(Employee employee)
         {
             if (employee is not null)
             {
-                _employee.Id = employee.Id;
-                _employee.FirstName = employee.FirstName;
-                _employee.LastName = employee.LastName;
-                _employee.Patronymic = employee.Patronymic;
-                _employee.Birthday = employee.Birthday;
-                _employee.EmploymentStart = employee.EmploymentStart;
-                _employee.EmploymentEnd = employee.EmploymentEnd;
+                this.Id = employee.Id;
+                this.FirstName = employee.FirstName;
+                this.LastName = employee.LastName;
+                this.Patronymic = employee.Patronymic;
+                this.Birthday = employee.Birthday;
+                this.EmploymentStart = employee.EmploymentStart;
+                this.EmploymentEnd = employee.EmploymentEnd;
             }
         }
 
-        public Employee Employee { get; }
+        public int Id { get; }
+
+        public string FirstName { get; }
+
+        public string LastName { get; }
+
+        public string Patronymic { get; }
+
+        public DateTime Birthday { get; }
+
+        public DateTime EmploymentStart { get; }
+
+        public DateTime? EmploymentEnd { get; } = null;
+
+        public Employee ToEmployee() => new Employee
+        {
+            Id = this.Id,
+            FirstName = this.FirstName,
+            LastName = this.LastName,
+            Patronymic = this.Patronymic,
+            Birthday = this.Birthday,
+            EmploymentStart = this.EmploymentStart,
+            EmploymentEnd = this.EmploymentEnd
+        };
 
     }
 }

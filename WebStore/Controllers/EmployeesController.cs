@@ -38,6 +38,8 @@ namespace WebStore.Controllers
 
         public IActionResult Edit(int id) => ViewById(id);
 
+        public IActionResult Delete(int id) => ViewById(id);
+
         [HttpPost]
         public IActionResult Edit(EmployeeViewModel model)
         {
@@ -53,8 +55,6 @@ namespace WebStore.Controllers
             action.Invoke(model.ToEmployee());
             return RedirectToAction("Index");
         }
-
-        public IActionResult Delete(int id) => ViewById(id);
 
         [HttpPost]
         public IActionResult DeleteConfirmed(int id) => id switch

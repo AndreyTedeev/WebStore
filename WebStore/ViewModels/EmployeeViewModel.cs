@@ -6,17 +6,14 @@ namespace WebStore.ViewModels
     public record EmployeeViewModel
     {
 
-        private readonly Employee _employee = new();
-
-        public EmployeeViewModel()
-        {
-        }
+        private readonly Employee _employee;
 
         public EmployeeViewModel(Employee employee)
         {
-            if (employee is not null)
-                _employee = employee;
+            _employee = employee ?? new();
         }
+
+        public EmployeeViewModel() : this((Employee)null) { }
 
         public int Id { get => _employee.Id; init => _employee.Id = value; }
 

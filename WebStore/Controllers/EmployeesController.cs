@@ -20,21 +20,7 @@ namespace WebStore.Controllers
             _employeesService = employeesService;
         }
 
-        public IActionResult Index() => View(_employeesService.Get());
-
-        public IActionResult Details(int id) => id switch
-        {
-            <= 0 => BadRequest(),
-            > 0 => _employeesService.Get(id) switch
-            {
-                null => NotFound(),
-                Employee e => View(e)
-            }
-        };
-
-        public IActionResult Create() => View("Edit", new EmployeeViewModel());
-
-        public IActionResult Edit(int id) => id switch
+        private IActionResult ViewById(int id) => id switch
         {
             <= 0 => BadRequest(),
             > 0 => _employeesService.Get(id) switch
@@ -43,6 +29,14 @@ namespace WebStore.Controllers
                 Employee e => View(new EmployeeViewModel(e))
             }
         };
+
+        public IActionResult Index() => View(_employeesService.Get());
+
+        public IActionResult Details(int id) => ViewById(id);
+
+        public IActionResult Create() => View("Edit", new EmployeeViewModel());
+
+        public IActionResult Edit(int id) => ViewById(id);
 
         [HttpPost]
         public IActionResult Edit(EmployeeViewModel model)
@@ -60,15 +54,7 @@ namespace WebStore.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult Delete(int id) => id switch
-        {
-            <= 0 => BadRequest(),
-            > 0 => _employeesService.Get(id) switch
-            {
-                null => NotFound(),
-                Employee e => View(new EmployeeViewModel(e))
-            }
-        };
+        public IActionResult Delete(int id) => ViewById(id);
 
         [HttpPost]
         public IActionResult DeleteConfirmed(int id) => id switch
@@ -76,7 +62,8 @@ namespace WebStore.Controllers
             <= 0 => BadRequest(),
             > 0 => _employeesService.Delete(id) switch
             {
-                _ => RedirectToAction("Index")
+                false => NotFound(),
+                true => RedirectToAction("Index")
             }
         };
     }

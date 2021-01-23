@@ -38,6 +38,14 @@ namespace WebStore.ViewModels
 
         public DateTime? EmploymentEnd { get; init; } = null;
 
+        public bool IsActive => EmploymentEnd is not null;
+
+        public int Age => Helper.DateDiffInYears(DateTime.Today, Birthday);
+
+        public int Seniority => Helper.DateDiffInYears(EmploymentEnd ?? DateTime.Today, EmploymentStart);
+
+        public string FullName => String.Format($"{LastName}, {FirstName} {Patronymic}");
+
         public Employee ToEmployee() => new Employee
         {
             Id = this.Id,

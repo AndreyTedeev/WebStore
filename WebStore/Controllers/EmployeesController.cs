@@ -52,7 +52,7 @@ namespace WebStore.Controllers
                     _ => _employeesService.Update
                 }
             };
-            action.Invoke(model.ToEmployee());
+            action.Invoke(model.Employee);
             return RedirectToAction("Index");
         }
 

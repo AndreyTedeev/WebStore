@@ -6,6 +6,8 @@ namespace WebStore.ViewModels
     public record EmployeeViewModel
     {
 
+        private readonly Employee _employee = new();
+
         public EmployeeViewModel()
         {
         }
@@ -13,49 +15,32 @@ namespace WebStore.ViewModels
         public EmployeeViewModel(Employee employee)
         {
             if (employee is not null)
-            {
-                this.Id = employee.Id;
-                this.FirstName = employee.FirstName;
-                this.LastName = employee.LastName;
-                this.Patronymic = employee.Patronymic;
-                this.Birthday = employee.Birthday;
-                this.EmploymentStart = employee.EmploymentStart;
-                this.EmploymentEnd = employee.EmploymentEnd;
-            }
+                _employee = employee;
         }
 
-        public int Id { get; init; }
+        public int Id { get => _employee.Id; init => _employee.Id = value; }
 
-        public string FirstName { get; init; }
+        public string FirstName { get => _employee.FirstName; init => _employee.FirstName = value; }
 
-        public string LastName { get; init; }
+        public string LastName { get => _employee.LastName; init => _employee.LastName = value; }
 
-        public string Patronymic { get; init; }
+        public string Patronymic { get => _employee.Patronymic; init => _employee.Patronymic = value; }
 
-        public DateTime Birthday { get; init; } = DateTime.Now;
+        public DateTime Birthday { get => _employee.Birthday; init => _employee.Birthday = value; }
 
-        public DateTime EmploymentStart { get; init; } = DateTime.Now;
+        public DateTime EmploymentStart { get => _employee.EmploymentStart; init => _employee.EmploymentStart = value; }
 
-        public DateTime? EmploymentEnd { get; init; } = null;
+        public DateTime? EmploymentEnd { get => _employee.EmploymentEnd; init => _employee.EmploymentEnd = value; }
 
-        public bool IsActive => EmploymentEnd is not null;
+        public bool IsActive => _employee.IsActive;
 
-        public int Age => Helper.DateDiffInYears(DateTime.Today, Birthday);
+        public int Age => _employee.Age;
 
-        public int Seniority => Helper.DateDiffInYears(EmploymentEnd ?? DateTime.Today, EmploymentStart);
+        public int Seniority => _employee.Seniority;
 
-        public string FullName => String.Format($"{LastName}, {FirstName} {Patronymic}");
+        public string FullName => _employee.FullName;
 
-        public Employee ToEmployee() => new Employee
-        {
-            Id = this.Id,
-            FirstName = this.FirstName,
-            LastName = this.LastName,
-            Patronymic = this.Patronymic,
-            Birthday = this.Birthday,
-            EmploymentStart = this.EmploymentStart,
-            EmploymentEnd = this.EmploymentEnd
-        };
+        public Employee Employee => _employee;
 
     }
 }

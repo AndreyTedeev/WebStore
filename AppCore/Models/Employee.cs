@@ -20,6 +20,8 @@ namespace WebStore.Models
 
         public DateTime? EmploymentEnd { get; set; } = null;
 
+
+
         public bool IsActive => EmploymentEnd is not null;
 
         public int Age => Helper.DateDiffInYears(DateTime.Today, Birthday);

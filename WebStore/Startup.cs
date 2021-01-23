@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WebStore.Interfaces;
+using WebStore.Services;
 
 namespace WebStore
 {
@@ -14,6 +16,8 @@ namespace WebStore
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<IEmployeesService, TestEmployeesService>();
+
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
         }
 

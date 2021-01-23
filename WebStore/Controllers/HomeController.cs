@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace WebStore.Controllers {
+namespace WebStore.Controllers
+{
 
-    public class HomeController : Controller {
+    public class HomeController : Controller
+    {
 
         public IActionResult Index() => View();
 

@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace WebStore {
+namespace WebStore
+{
 
-    public class Program {
+    public class Program
+    {
 
         public static void Main(string[] args) =>
             CreateHostBuilder(args).Build().Run();

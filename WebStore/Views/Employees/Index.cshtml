@@ -5,7 +5,11 @@
     ViewData["Title"] = "Employees";
 }
 
-<h3>EMPLOYEES</h3>
+<h4>@ViewData["Title"] = "Employees"</h4>
+
+<div>
+    <a asp-action="Create" class="btn btn-primary">Create</a>
+</div>
 
 <table class="table">
     <thead>
@@ -14,6 +18,8 @@
             <th>Name</th>
             <th>Age</th>
             <th></th>
+            <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -21,17 +27,24 @@
         {
             <tr>
                 <td>@employee.Id</td>
-                <td><a asp-controller="Employees" asp-action="Details" asp-route-id="@employee.Id">@employee.FullName</a>
+                <td>
+                    <a asp-controller="Employees" asp-action="Details" asp-route-id="@employee.Id">@employee.FullName</a>
                 </td>
                 <td>@employee.Age</td>
                 <td>
                     <a asp-controller="Employees" asp-action="Details" asp-route-id="@employee.Id">
                         <i class="fa fa-info-circle"></i>
-                    </a>|<a href="#">
-                        <i class="fa fa-edit"></i>
-                    </a>|<a href="#" class="text-danger">
-                        <i class="fa fa-trash-o"></i>
                     </a>
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@employee.Id">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                </td>
+                <td>
+                    <form id="f_@employee.Id" asp-action="DeleteConfirmed" asp-route-id="@employee.Id" class="text-danger">
+                        <a href="#" onclick="javascript: document.getElementById('f_@employee.Id').submit();"><i class="fa fa-trash-o"></i></a>
+                    </form>
                 </td>
             </tr>
         }

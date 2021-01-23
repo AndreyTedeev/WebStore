@@ -24,19 +24,19 @@ namespace WebStore.ViewModels
             }
         }
 
-        public int Id { get; }
+        public int Id { get; init; }
 
-        public string FirstName { get; }
+        public string FirstName { get; init; }
 
-        public string LastName { get; }
+        public string LastName { get; init; }
 
-        public string Patronymic { get; }
+        public string Patronymic { get; init; }
 
-        public DateTime Birthday { get; }
+        public DateTime Birthday { get; init; } = DateTime.Now;
 
-        public DateTime EmploymentStart { get; }
+        public DateTime EmploymentStart { get; init; } = DateTime.Now;
 
-        public DateTime? EmploymentEnd { get; } = null;
+        public DateTime? EmploymentEnd { get; init; } = null;
 
         public Employee ToEmployee() => new Employee
         {

@@ -53,35 +53,35 @@ namespace WebStore.Services
             //Action action = (employee, _employees.Contains(employee), Get(employee.Id)) switch
             //{
             //    (null, _, _) => throw new ArgumentNullException(nameof(employee)),
-            //    (_, true, _) => null,
-            //    (_, false, null) => null,
-            //    (_, false, Employee e) => () =>
+            //    (Employee source, true, _) => null,
+            //    (Employee source, false, null) => null,
+            //    (Employee source, false, Employee target) => () =>
             //       {
-            //           e.LastName = employee.LastName;
-            //           e.FirstName = employee.FirstName;
-            //           e.Patronymic = employee.Patronymic;
-            //           e.Birthday = employee.Birthday;
-            //           e.EmploymentStart = employee.EmploymentStart;
-            //           e.EmploymentEnd = employee.EmploymentEnd;
+            //           target.LastName = source.LastName;
+            //           target.FirstName = source.FirstName;
+            //           target.Patronymic = source.Patronymic;
+            //           target.Birthday = source.Birthday;
+            //           target.EmploymentStart = source.EmploymentStart;
+            //           target.EmploymentEnd = source.EmploymentEnd;
             //       }
             //};
             Action action = employee switch
             {
                 null => throw new ArgumentNullException(nameof(employee)),
-                _ => _employees.Contains(employee) switch
+                Employee source => _employees.Contains(source) switch
                 {
                     true => null,
-                    false => Get(employee.Id) switch
+                    false => Get(source.Id) switch
                     {
                         null => null,
-                        Employee e => () =>
+                        Employee target => () =>
                         {
-                            e.LastName = employee.LastName;
-                            e.FirstName = employee.FirstName;
-                            e.Patronymic = employee.Patronymic;
-                            e.Birthday = employee.Birthday;
-                            e.EmploymentStart = employee.EmploymentStart;
-                            e.EmploymentEnd = employee.EmploymentEnd;
+                            target.LastName = source.LastName;
+                            target.FirstName = source.FirstName;
+                            target.Patronymic = source.Patronymic;
+                            target.Birthday = source.Birthday;
+                            target.EmploymentStart = source.EmploymentStart;
+                            target.EmploymentEnd = source.EmploymentEnd;
                         }
                     }
                 }

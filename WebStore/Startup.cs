@@ -16,7 +16,7 @@ namespace WebStore
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<IEmployeesService, TestEmployeesService>();
+            services.AddTransient<IEmployeesService, EmployeesService>();
 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
         }

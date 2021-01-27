@@ -8,7 +8,7 @@ using WebStore.Entities.Base.Interfaces;
 
 namespace WebStore.Entities
 {
-    public class Brand : NamedEntity, IOrderedEntity
+    public record Brand : NamedEntity, IOrderedEntity
     {
         public int OrderNumber { get; set; }
     }

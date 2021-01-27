@@ -46,14 +46,23 @@ namespace WebStore.Controllers
             Action<Employee> action = model switch
             {
                 null => throw new ArgumentNullException(nameof(model)),
-                _ => model.Id switch
+                _ => ModelState.IsValid switch
                 {
-                    0 => _employeesService.Add,
-                    _ => _employeesService.Update
+                    false => null,
+                    true => model.Id switch
+                    {
+                        0 => _employeesService.Add,
+                        _ => _employeesService.Update
+                    }
                 }
             };
-            action.Invoke(model.Employee);
-            return RedirectToAction("Index");
+            if (action is null)
+                return View(model);
+            else
+            {
+                action.Invoke(model.Employee);
+                return RedirectToAction("Index");
+            }
         }
 
         [HttpPost]

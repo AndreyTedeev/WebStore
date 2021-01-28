@@ -2,7 +2,7 @@
 
 namespace WebStore.ViewModels
 {
-    public class CategoryViewModel
+    public record CategoryViewModel
     {
         public int Id { get; init; }
 

@@ -9,7 +9,7 @@ namespace WebStore.Interfaces
 {
     public interface IProductsService
     {
-        IEnumerable<ProductCategory> GetCategories();
+        IEnumerable<Category> GetCategories();
 
         IEnumerable<Brand> GetBrands();
     }

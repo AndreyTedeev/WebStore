@@ -8,7 +8,7 @@ using WebStore.Entities.Base.Interfaces;
 
 namespace WebStore.Entities
 {
-    public record ProductCategory : NamedEntity, IOrderedEntity
+    public record Category : NamedEntity, IOrderedEntity
     {
         public int OrderNumber { get; set; }
 

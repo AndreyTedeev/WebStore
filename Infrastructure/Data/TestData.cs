@@ -55,7 +55,7 @@ namespace WebStore.Data
 
         public static List<Brand> Brands => _brands;
 
-        private static readonly List<ProductCategory> _productCategories = new()
+        private static readonly List<Category> _categories = new()
         {
             new() { Id = 1, Name = "Sportswear", OrderNumber = 1 },
             new() { Id = 2, Name = "Nike", OrderNumber = 1, ParentId = 1 },
@@ -99,7 +99,7 @@ namespace WebStore.Data
 
         };
 
-        public static List<ProductCategory> ProductCategories => _productCategories;
+        public static List<Category> Categories => _categories;
 
     }
 }

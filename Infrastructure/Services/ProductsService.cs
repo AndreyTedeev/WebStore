@@ -9,16 +9,16 @@ namespace WebStore.Services
     {
 
         private readonly List<Brand> _brands;
-        private readonly List<ProductCategory> _productCategories;
+        private readonly List<Category> _productCategories;
 
         public ProductsService()
         {
             _brands = TestData.Brands;
-            _productCategories = TestData.ProductCategories;
+            _productCategories = TestData.Categories;
         }
 
         public IEnumerable<Brand> GetBrands() => _brands;
 
-        public IEnumerable<ProductCategory> GetCategories() => _productCategories;
+        public IEnumerable<Category> GetCategories() => _productCategories;
     }
 }

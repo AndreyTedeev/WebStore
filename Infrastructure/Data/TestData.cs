@@ -101,5 +101,23 @@ namespace WebStore.Data
 
         public static List<Category> Categories => _categories;
 
+        private static List<Product> _products = new()
+        {
+            new() { Id = 1, Name = "Product 1", ImageUrl = "product1.jpg", Price = 101, CategoryId = 2, BrandId = 1 },
+            new() { Id = 2, Name = "Product 2", ImageUrl = "product2.jpg", Price = 102, CategoryId = 8, BrandId = 1 },
+            new() { Id = 2, Name = "Product 3", ImageUrl = "product3.jpg", Price = 103, CategoryId = 19, BrandId = 2 },
+            new() { Id = 2, Name = "Product 4", ImageUrl = "product4.jpg", Price = 104, CategoryId = 24, BrandId = 2 },
+            new() { Id = 2, Name = "Product 5", ImageUrl = "product5.jpg", Price = 105, CategoryId = 25, BrandId = 3 },
+            new() { Id = 2, Name = "Product 6", ImageUrl = "product6.jpg", Price = 106, CategoryId = 26, BrandId = 3 },
+            new() { Id = 2, Name = "Product 7", ImageUrl = "product7.jpg", Price = 107, CategoryId = 27, BrandId = 4 },
+            new() { Id = 2, Name = "Product 8", ImageUrl = "product8.jpg", Price = 108, CategoryId = 28, BrandId = 5 },
+            new() { Id = 2, Name = "Product 9", ImageUrl = "product9.jpg", Price = 109, CategoryId = 29, BrandId = 5 },
+            new() { Id = 2, Name = "Product 10", ImageUrl = "product10.jpg", Price = 110, CategoryId = 30, BrandId = 6 },
+            new() { Id = 2, Name = "Product 11", ImageUrl = "product11.jpg", Price = 111, CategoryId = 1, BrandId = 7 },
+            new() { Id = 2, Name = "Product 12", ImageUrl = "product12.jpg", Price = 112, CategoryId = 1, BrandId = 7 }
+        };
+
+        public static List<Product> Products => _products;
+
     }
 }

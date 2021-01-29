@@ -1,12 +1,11 @@
 ﻿using System;
+using WebStore.Entities.Base;
 
 namespace WebStore.Models
 {
 
-    public record Employee
+    public record Employee : Entity
     {
-
-        public int Id { get; set; }
 
         public string FirstName { get; set; }
 

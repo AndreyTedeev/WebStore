@@ -7,13 +7,13 @@ using WebStore.Models;
 
 namespace WebStore.Services
 {
-    public class TestEmployeesService : IEmployeesService
+    public class EmployeesService : IEmployeesService
     {
 
         private readonly List<Employee> _employees;
         private int _currentMaxId;
 
-        public TestEmployeesService()
+        public EmployeesService()
         {
             _employees = TestData.Employees;
             _currentMaxId = _employees.DefaultIfEmpty().Max(employee => employee.Id);

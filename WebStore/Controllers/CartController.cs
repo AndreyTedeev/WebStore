@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace WebStore.Controllers {
+namespace WebStore.Controllers
+{
 
-    public class CartController : Controller {
+    public class CartController : Controller
+    {
 
         public IActionResult Index() => View();
 

@@ -2,12 +2,16 @@ using System;
 using System.Collections.Generic;
 using WebStore.Models;
 
-namespace WebStore.Data {
+namespace WebStore.Data
+{
 
-    public class TestData {
+    public class TestData
+    {
 
-        private static readonly List<Employee> _employees = new() {
-            new() {
+        private static readonly List<Employee> _employees = new()
+        {
+            new()
+            {
                 Id = 1,
                 LastName = "Иванов",
                 FirstName = "Иван",
@@ -15,7 +19,8 @@ namespace WebStore.Data {
                 Birthday = new DateTime(1971, 11, 23),
                 EmploymentStart = new DateTime(2010, 12, 1)
             },
-            new() {
+            new()
+            {
                 Id = 2,
                 LastName = "Петров",
                 FirstName = "Пётр",
@@ -23,7 +28,8 @@ namespace WebStore.Data {
                 Birthday = new DateTime(1981, 9, 3),
                 EmploymentStart = new DateTime(2014, 2, 16)
             },
-            new() {
+            new()
+            {
                 Id = 3,
                 LastName = "Сидоров",
                 FirstName = "Сидор",

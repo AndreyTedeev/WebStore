@@ -1,11 +1,11 @@
-﻿@model WebStore.Models.Employee
+﻿@model EmployeeViewModel
 @{
     Layout = "_LayoutEmployees";
-    ViewData["Title"] = $"Employee ID:{Model.Id}";
+    ViewData["Title"] = $"Employee #{Model.Id}";
 }
 
-<h3>EMPLOYEE CARD</h3>
-
+<h4>@ViewData["Title"]</h4>
+<hr />
 <table class="table">
     <tbody>
         <tr>
@@ -47,3 +47,5 @@
 <hr />
 
 <a asp-controller="Employees" asp-action="Index">Employees</a>
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+<a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>

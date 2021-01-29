@@ -5,16 +5,24 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WebStore.Interfaces;
+using WebStore.Services;
 
-namespace WebStore {
+namespace WebStore
+{
 
-    public record Startup(IConfiguration Configuration) {
+    public record Startup(IConfiguration Configuration)
+    {
 
-        public void ConfigureServices(IServiceCollection services) {
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddTransient<IEmployeesService, TestEmployeesService>();
+
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env) {
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
 
@@ -22,7 +30,8 @@ namespace WebStore {
 
             app.UseRouting();
 
-            app.UseEndpoints(endpoints => {
+            app.UseEndpoints(endpoints =>
+            {
                 endpoints.MapGet(
                     "/test",
                     async context => await context.Response.WriteAsync(Configuration["TestMessage"]));

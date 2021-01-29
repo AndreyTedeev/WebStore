@@ -1,8 +1,10 @@
 ﻿using System;
 
-namespace WebStore.Models {
+namespace WebStore.Models
+{
 
-    public class Employee {
+    public record Employee
+    {
 
         public int Id { get; set; }
 
@@ -12,9 +14,9 @@ namespace WebStore.Models {
 
         public string Patronymic { get; set; }
 
-        public DateTime Birthday { get; set; }
+        public DateTime Birthday { get; set; } = DateTime.Now;
 
-        public DateTime EmploymentStart { get; set; }
+        public DateTime EmploymentStart { get; set; } = DateTime.Now;
 
         public DateTime? EmploymentEnd { get; set; } = null;
 

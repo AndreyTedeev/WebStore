@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace WebStore.Controllers {
+namespace WebStore.Controllers
+{
 
-    public class BlogController : Controller {
+    public class BlogController : Controller
+    {
 
         public IActionResult List() => View();
 

@@ -7,6 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WebStore.Interfaces;
 using WebStore.Services;
+using WebStore.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebStore
 {
@@ -16,7 +18,11 @@ namespace WebStore
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<WebStoreDB>(options => options
+                .UseSqlServer(Configuration.GetConnectionString("Default")));
+
             services.AddTransient<IEmployeesService, EmployeesService>();
+
             services.AddTransient<IProductsService, ProductsService>();
 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();

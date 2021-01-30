@@ -3,7 +3,7 @@ using WebStore.Entities;
 
 namespace WebStore.Data
 {
-    public class WebStoreDB : DbContext
+    public class Db : DbContext
     {
         public DbSet<Product> Products { get; set; }
 
@@ -11,7 +11,7 @@ namespace WebStore.Data
 
         public DbSet<Category> Categories { get; set; }
 
-        public WebStoreDB(DbContextOptions<WebStoreDB> options) : base(options) { }
+        public Db(DbContextOptions<Db> options) : base(options) { }
 
 
     }

@@ -18,8 +18,10 @@ namespace WebStore
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<WebStoreDB>(options => options
+            services.AddDbContext<Db>(options => options
                 .UseSqlServer(Configuration.GetConnectionString("Default")));
+
+            services.AddTransient<DbInitializer>();
 
             services.AddTransient<IEmployeesService, EmployeesService>();
 
@@ -28,8 +30,10 @@ namespace WebStore
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DbInitializer db)
         {
+            db.Initialize();
+
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
 

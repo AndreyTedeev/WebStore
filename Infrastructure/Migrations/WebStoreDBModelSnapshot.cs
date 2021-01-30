@@ -8,7 +8,7 @@ using WebStore.Data;
 
 namespace WebStore.Migrations
 {
-    [DbContext(typeof(WebStoreDB))]
+    [DbContext(typeof(Db))]
     partial class WebStoreDBModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

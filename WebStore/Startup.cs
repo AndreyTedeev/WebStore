@@ -23,9 +23,10 @@ namespace WebStore
 
             services.AddTransient<DbInitializer>();
 
-            services.AddTransient<IEmployeesService, EmployeesService>();
+            services.AddTransient<IEmployeesService, InMemoryEmployeesService>();
 
-            services.AddTransient<IProductsService, ProductsService>();
+            // services.AddTransient<IProductsService, InMemoryProductsService>();
+            services.AddTransient<IProductsService, SqlServerProductsService>();
 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
         }

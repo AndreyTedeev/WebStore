@@ -6,13 +6,13 @@ using WebStore.Interfaces;
 
 namespace WebStore.Services
 {
-    public class ProductsService : IProductsService
+    public class InMemoryProductsService : IProductsService
     {
 
         private readonly List<Brand> _brands;
         private readonly List<Category> _productCategories;
 
-        public ProductsService()
+        public InMemoryProductsService()
         {
             _brands = TestData.Brands;
             _productCategories = TestData.Categories;

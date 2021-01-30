@@ -9,7 +9,9 @@
             @foreach (var brand in Model)
             {
                 <li>
-                    <a asp-controller="Catalog" asp-action="Index" asp-route-BrandId="@brand.Id"> <span class="pull-right">(-)</span>@brand.Name</a>
+                    <a asp-controller="Catalog" asp-action="Index" asp-route-BrandId="@brand.Id">
+                        <span class="pull-right">(@brand.ProductsCount)</span>@brand.Name
+                    </a>
                 </li>
             }
         </ul>

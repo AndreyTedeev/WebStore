@@ -33,7 +33,8 @@ namespace WebStore.Components
                 {
                     Id = parent.Id,
                     Name = parent.Name,
-                    OrderNumber = parent.OrderNumber
+                    OrderNumber = parent.OrderNumber,
+                    ProductsCount = parent.Products.Count()
                 };
 
                 var children = categories.Where(c => c.ParentId == parent.Id);
@@ -44,7 +45,8 @@ namespace WebStore.Components
                         Id = child.Id,
                         Name = child.Name,
                         OrderNumber = child.OrderNumber,
-                        Parent = parentModel
+                        Parent = parentModel,
+                        ProductsCount = child.Products.Count()
                     });
                 }
                 parentModel.Children.Sort(CompareByOrder);

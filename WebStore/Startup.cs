@@ -52,7 +52,7 @@ namespace WebStore
             {
                 options.Cookie.Name = "WebStore.AT";
                 options.Cookie.HttpOnly = true;
-                options.Cookie.Expiration = TimeSpan.FromDays(10);
+                options.ExpireTimeSpan = TimeSpan.FromDays(10);
 
                 options.LoginPath = "/Account/Login";
                 options.LogoutPath = "/Account/Logout";

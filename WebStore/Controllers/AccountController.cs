@@ -39,5 +39,41 @@ namespace WebStore.Controllers
             return View(model);
         }
 
+        public IActionResult Login(string returnUrl) => View(new LoginViewModel { ReturnUrl = returnUrl });
+
+        [HttpPost, ValidateAntiForgeryToken, ActionName("Login")]
+        public async Task<IActionResult> LoginAsync(LoginViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _signInManager.PasswordSignInAsync(
+                    model.UserName,
+                    model.Password,
+                    model.RememberMe,
+#if DEBUG
+                    false
+#else
+                    true
+#endif
+                    );
+                if (result.Succeeded)
+                    return LocalRedirect(model.ReturnUrl ?? "/");
+                else
+                    ModelState.AddModelError("", "Wrong user name or password");
+            }
+            return View(model);
+        }
+
+        public async Task<IActionResult> LogoutAsync()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult AccessDenied(string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+            return View();
+        }
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebStore.Data;
 using WebStore.Interfaces;
@@ -9,7 +10,7 @@ using WebStore.ViewModels;
 
 namespace WebStore.Controllers
 {
-
+    [Authorize]
     public class EmployeesController : Controller
     {
 

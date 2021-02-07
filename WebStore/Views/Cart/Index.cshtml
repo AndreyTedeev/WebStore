@@ -1,7 +1,7 @@
-@{
-    ViewData["Title"] = $"Card";
-}
+@model CartViewModel
 
-<partial name="_CartItems" />
+@{ ViewData["Title"] = "Cart"; }
 
-<partial name="_DoAction" />
+<partial name="_CartItems" model="Model" />
+
+<partial name="_DoAction" model="Model" />

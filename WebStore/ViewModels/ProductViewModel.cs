@@ -2,7 +2,7 @@
 
 namespace WebStore.ViewModels
 {
-    public record ProductViewModel()
+    public record ProductViewModel
     {
         public int Id { get; init; }
 

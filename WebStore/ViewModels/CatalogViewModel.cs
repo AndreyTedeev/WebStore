@@ -12,5 +12,6 @@ namespace WebStore.ViewModels
         public int? CategoryId { get; init; }
 
         public int? BrandId { get; init; }
+
     }
 }

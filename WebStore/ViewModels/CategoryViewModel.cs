@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace WebStore.ViewModels
 {
@@ -13,6 +14,10 @@ namespace WebStore.ViewModels
         public CategoryViewModel Parent { get; init; }
 
         public List<CategoryViewModel> Children { get; } = new List<CategoryViewModel>();
+
+        public int ProductsCount { get; set; }
+
+        public int TotalProductsCount => ProductsCount + Children.Sum((c) => c.TotalProductsCount);
 
     }
 }

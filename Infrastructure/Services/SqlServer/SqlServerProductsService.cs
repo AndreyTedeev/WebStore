@@ -32,5 +32,10 @@ namespace WebStore.Services
 
             return result;
         }
+
+        public Product GetProduct(int id) => _db.Products
+            .Include(product => product.Brand)
+            .Include(product => product.Category)
+            .Single(product => product.Id == id);
     }
 }

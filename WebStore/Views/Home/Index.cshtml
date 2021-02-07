@@ -6,7 +6,7 @@
             .GetProducts()
             .OrderBy(p => p.OrderNumber)
             .Take(6)
-            .Select(p => new ProductViewModel(p));
+            .ToVieW();
 }
 
 <partial name="Partial/_Slider" />

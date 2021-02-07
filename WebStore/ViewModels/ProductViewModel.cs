@@ -2,21 +2,17 @@
 
 namespace WebStore.ViewModels
 {
-    public record ProductViewModel
+    public record ProductViewModel()
     {
-        private readonly Product _product;
+        public int Id { get; init; }
 
-        public ProductViewModel(Product product) => _product = product ?? new();
+        public string Name { get; init; }
 
-        public int Id { get => _product.Id; init => _product.Id = value; }
+        public string ImageUrl { get; init; }
 
-        public string Name { get => _product.Name; init => _product.Name = value; }
+        public decimal Price { get; init; }
 
-        public string ImageUrl { get => _product.ImageUrl; init => _product.ImageUrl = value; }
-
-        public decimal Price { get => _product.Price; init => _product.Price = value; }
-
-        public Product Product => _product;
+        public Brand Brand { get; init; }
     }
 
 }

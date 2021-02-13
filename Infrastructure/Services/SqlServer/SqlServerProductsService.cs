@@ -22,7 +22,9 @@ namespace WebStore.Services
 
         public IEnumerable<Product> GetProducts(ProductFilter filter = null)
         {
-            IEnumerable<Product> result = _db.Products;
+            IEnumerable<Product> result = _db.Products
+                .Include(product => product.Brand)
+                .Include(product => product.Category);
 
             if (filter?.Ids?.Length > 0)
             {

@@ -24,13 +24,24 @@ namespace WebStore.Services
         {
             IEnumerable<Product> result = _db.Products;
 
-            if (filter?.CategoryId is { } categoryId)
-                result = result.Where(product => product.CategoryId == categoryId);
+            if (filter?.Ids?.Length > 0)
+            {
+                result = result.Where(product => filter.Ids.Contains(product.Id));
+            }
+            else
+            {
+                if (filter?.CategoryId is { } categoryId)
+                    result = result.Where(product => product.CategoryId == categoryId);
 
-            if (filter?.BrandId is { } brandId)
-                result = result.Where(product => product.BrandId == brandId);
-
+                if (filter?.BrandId is { } brandId)
+                    result = result.Where(product => product.BrandId == brandId);
+            }
             return result;
         }
+
+        public Product GetProduct(int id) => _db.Products
+            .Include(product => product.Brand)
+            .Include(product => product.Category)
+            .Single(product => product.Id == id);
     }
 }

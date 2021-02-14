@@ -23,11 +23,12 @@ namespace WebStore.Controllers
             {
                 CategoryId = categoryId,
                 BrandId = brandId,
-                Products = products.OrderBy(p => p.OrderNumber).Select(p => new ProductViewModel(p))
+                Products = products.OrderBy(p => p.OrderNumber).ToVieW()
             });
         }
 
-        public IActionResult Details() => View();
+        public IActionResult Details(int id) =>
+            View(_productsService.GetProduct(id).ToView());
 
     }
 }

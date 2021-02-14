@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using WebStore.Entities;
+using WebStore.Entities.Identity;
 
 namespace WebStore.Data
 {
@@ -11,11 +14,65 @@ namespace WebStore.Data
     {
         private readonly Db _db;
         private readonly ILogger<DbInitializer> _logger;
+        private readonly UserManager<User> _userManager;
+        private readonly RoleManager<Role> _roleManager;
 
-        public DbInitializer(Db db, ILogger<DbInitializer> logger)
+        public DbInitializer(Db db, ILogger<DbInitializer> logger, UserManager<User> userManager, RoleManager<Role> roleManager)
         {
             _db = db;
             _logger = logger;
+            _userManager = userManager;
+            _roleManager = roleManager;
+        }
+
+        public void Initialize()
+        {
+            _logger.LogInformation("Initializing database");
+
+            ProcessMigrations();
+
+            SeedIdentityAsync().Wait();
+
+            if (!_db.Products.Any())
+                SeedInitialData();
+
+            _logger.LogInformation("Success : Initialize database");
+        }
+
+        private async Task SeedIdentityAsync()
+        {
+            async Task CheckRole(string name)
+            {
+                if (!await _roleManager.RoleExistsAsync(name))
+                    await _roleManager.CreateAsync(new Role { Name = name });
+            }
+
+            await CheckRole(Role.Administrator);
+            await CheckRole(Role.User);
+
+            await SeedUser(User.Administrator, User.AdminPassword, Role.Administrator);
+
+        }
+
+        private async Task SeedUser(string userName, string password, string role)
+        {
+            if (await _userManager.FindByNameAsync(userName) is null)
+            {
+                var user = new User { UserName = userName };
+                var result = await _userManager.CreateAsync(user, password);
+                if (!result.Succeeded)
+                    ThrowErrors(result, $"Error creating {userName}");
+
+                result = await _userManager.AddToRoleAsync(user, role);
+                if (!result.Succeeded)
+                    ThrowErrors(result, $"Error adding {userName} to role {role}");
+            }
+
+            static void ThrowErrors(IdentityResult result, string message)
+            {
+                var errors = result.Errors.Select(e => e.Description);
+                throw new InvalidOperationException($"{message} : {String.Join(',', errors)}");
+            }
         }
 
         private void ProcessMigrations()
@@ -222,18 +279,6 @@ namespace WebStore.Data
                    Category = FindCategory("Sportswear", categories)}
             };
             return result;
-        }
-
-        public void Initialize()
-        {
-            _logger.LogInformation("Initializing database");
-
-            ProcessMigrations();
-
-            if (!_db.Products.Any())
-                SeedInitialData();
-
-            _logger.LogInformation("Success : Initialize database");
         }
 
     }

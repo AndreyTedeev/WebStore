@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebStore", "WebStore\WebSto
 		{834CEA5B-051C-4A31-9A2C-42BE32DFE104} = {834CEA5B-051C-4A31-9A2C-42BE32DFE104}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppCore", "AppCore\AppCore.csproj", "{834CEA5B-051C-4A31-9A2C-42BE32DFE104}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppCore", "AppCore\AppCore.csproj", "{834CEA5B-051C-4A31-9A2C-42BE32DFE104}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{52714E32-C7DE-466D-A4FF-8AC372EFD803}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{52714E32-C7DE-466D-A4FF-8AC372EFD803}"
 	ProjectSection(ProjectDependencies) = postProject
 		{834CEA5B-051C-4A31-9A2C-42BE32DFE104} = {834CEA5B-051C-4A31-9A2C-42BE32DFE104}
 	EndProjectSection

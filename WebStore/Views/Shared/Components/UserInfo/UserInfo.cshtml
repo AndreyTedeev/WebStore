@@ -1,0 +1,27 @@
+﻿@using WebStore.Entities.Identity
+
+<div class="shop-menu pull-right">
+    <ul class="nav navbar-nav">
+        @if (User.IsInRole(Role.Administrator))
+        {
+            <li><a href="#"><i class="fa fa-keyboard-o"></i> Administrate Users</a></li>
+        }
+        <li><a href="#"><i class="fa fa-user"></i>@(User.Identity?.Name)</a></li>
+        <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
+        <li>
+            <a asp-controller="Cart" asp-action="CheckOut">
+                <i class="fa fa-crosshairs"></i> Checkout
+            </a>
+        </li>
+        <li>
+            <a asp-controller="Cart" asp-action="Index">
+                <i class="fa fa-shopping-cart"></i> Cart
+            </a>
+        </li>
+        <li>
+            <a asp-controller="Account" asp-action="Logout">
+                <i class="fa fa-lock"></i> Logout
+            </a>
+        </li>
+    </ul>
+</div>

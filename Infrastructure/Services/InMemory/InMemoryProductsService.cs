@@ -34,5 +34,10 @@ namespace WebStore.Services
 
             return result;
         }
+
+        public Product GetProduct(int id)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿@model EmployeeViewModel
+﻿@using WebStore.Entities.Identity
+@model EmployeeViewModel
 @{
     Layout = "_LayoutEmployees";
     ViewData["Title"] = $"Employee #{Model.Id}";
@@ -47,5 +48,8 @@
 <hr />
 
 <a asp-controller="Employees" asp-action="Index">Employees</a>
-<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
-<a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+@if (User.IsInRole(Role.Administrator))
+{
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+    <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+}

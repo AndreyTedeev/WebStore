@@ -1,6 +1,11 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Razor.Language;
+using WebStore.Entities;
+using WebStore.Entities.Identity;
 using WebStore.Interfaces;
 using WebStore.ViewModels;
 
@@ -20,20 +25,9 @@ namespace WebStore.Controllers
 
         public IActionResult Index()
         {
-            var cart = _cartService.Cart;
-
-            var products = _productsService.GetProducts(new ProductFilter
+            var model = new CartOrderViewModel
             {
-                Ids = cart.Items.Select(item => item.ProductId).ToArray()
-            });
-
-            var dictionary = products.ToVieW().ToDictionary(product => product.Id);
-
-            var model = new CartViewModel
-            {
-                Items = cart.Items
-                    .Where(item => dictionary.ContainsKey(item.ProductId))
-                    .Select(item => (dictionary[item.ProductId], item.Quantity))
+                Cart = GetCartViewModel()
             };
 
             return View(model);
@@ -63,7 +57,81 @@ namespace WebStore.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult CheckOut() => View();
+        public async Task<IActionResult> CheckOut(
+            OrderViewModel orderModel,
+            [FromServices] IOrdersService ordersService,
+            [FromServices] UserManager<User> userManager)
+        {
+            var cartModel = GetCartViewModel();
+
+            if (!ModelState.IsValid)
+            {
+                return View(nameof(Index), new CartOrderViewModel
+                {
+                    Cart = cartModel,
+                    Order = orderModel
+                });
+
+            }
+            var userName = User.Identity?.Name;
+            var user = await userManager.FindByNameAsync(userName);
+            if (user is null)
+                throw new InvalidOperationException($"User {userName} is not found.");
+
+            var order = CreateOrder(user, cartModel, orderModel);
+            await ordersService.Add(order);
+
+            _cartService.Clear();
+            return RedirectToAction(nameof(OrderConfirmed), new { order.Id });
+        }
+
+        public IActionResult OrderConfirmed(int id)
+        {
+            ViewBag.OrderId = id;
+            return View();
+        }
+
+        private Order CreateOrder(User user, CartViewModel cartModel, OrderViewModel orderModel)
+        {
+            var order = new Order
+            {
+                Name = orderModel.Name,
+                Phone = orderModel.Phone,
+                Address = orderModel.Address,
+                User = user
+            };
+
+            var cart_products = _productsService.GetProducts(new ProductFilter
+            {
+                Ids = cartModel.Items.Select(x => x.Product.Id).ToArray()
+            });
+
+            order.Items = cartModel.Items.Join(
+                cart_products,
+                cart_item => cart_item.Product.Id,
+                product => product.Id,
+                (cart_item, product) => new OrderItem
+                {
+                    Order = order,
+                    Product = product,
+                    Quantity = cart_item.Quantity,
+                    Price = product.Price
+                }).ToArray();
+
+            return order;
+        }
+
+        private CartViewModel GetCartViewModel()
+        {
+            var cart = _cartService.Cart;
+
+            var products = _productsService.GetProducts(new ProductFilter
+            {
+                Ids = cart.Items.Select(item => item.ProductId).ToArray()
+            });
+
+            return cart.ToView(products);
+        }
 
     }
 }

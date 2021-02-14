@@ -29,5 +29,16 @@ namespace WebStore.ViewModels
             Brand = source.Brand
         };
 
+        public static CartViewModel ToView(this Cart source, IEnumerable<Product> products)
+        {
+            var dictionary = products.ToVieW().ToDictionary(product => product.Id);
+
+            return new CartViewModel
+            {
+                Items = source.Items
+                    .Where(item => dictionary.ContainsKey(item.ProductId))
+                    .Select(item => (dictionary[item.ProductId], item.Quantity))
+            };
+        }
     }
 }

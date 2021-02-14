@@ -13,8 +13,9 @@ namespace WebStore.Data
 
         public DbSet<Category> Categories { get; set; }
 
-        public Db(DbContextOptions<Db> options) : base(options) { }
+        public DbSet<Order> Orders { get; set; }
 
+        public Db(DbContextOptions<Db> options) : base(options) { }
 
     }
 }

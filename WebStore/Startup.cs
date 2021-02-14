@@ -9,6 +9,9 @@ using WebStore.Interfaces;
 using WebStore.Services;
 using WebStore.Data;
 using Microsoft.EntityFrameworkCore;
+using WebStore.Entities.Identity;
+using Microsoft.AspNetCore.Identity;
+using System;
 
 namespace WebStore
 {
@@ -22,6 +25,41 @@ namespace WebStore
                 .UseSqlServer(Configuration.GetConnectionString("Default")));
 
             services.AddTransient<DbInitializer>();
+
+            services.AddIdentity<User, Role>()
+                .AddEntityFrameworkStores<Db>()
+                .AddDefaultTokenProviders();
+
+            services.Configure<IdentityOptions>(options =>
+            {
+#if DEBUG
+                options.Password.RequiredLength = 3;
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredUniqueChars = 3;
+#endif
+                options.User.RequireUniqueEmail = false;
+                options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+                options.Lockout.AllowedForNewUsers = false;
+                options.Lockout.MaxFailedAccessAttempts = 10;
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
+            });
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.Name = "WebStore.AT";
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromDays(10);
+
+                options.LoginPath = "/Account/Login";
+                options.LogoutPath = "/Account/Logout";
+                options.AccessDeniedPath = "/Account/AccessDenied";
+
+                options.SlidingExpiration = true;
+            });
 
             services.AddTransient<IEmployeesService, InMemoryEmployeesService>();
 
@@ -41,6 +79,9 @@ namespace WebStore
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

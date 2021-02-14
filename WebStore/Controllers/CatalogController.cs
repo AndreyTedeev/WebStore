@@ -23,7 +23,7 @@ namespace WebStore.Controllers
             {
                 CategoryId = categoryId,
                 BrandId = brandId,
-                Products = products.OrderBy(p => p.OrderNumber).ToVieW()
+                Products = products.OrderBy(p => p.OrderNumber).ToView()
             });
         }
 
